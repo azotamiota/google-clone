@@ -1,21 +1,26 @@
 const searchBtn = document.getElementById('btn-search');
 const randButton = document.getElementById('btn-random');
 const searchIcon = document.getElementById('search-icon');
+const main = document.querySelector('main');
+const temporaryMessage = document.createElement('p');
+const segment = document.createElement('article');
 const resultsUrl = 'http://localhost:3000/results';
 const randomUrl = 'http://localhost:3000/results/random';
 
+const addLoadingLabel = () => {
+    temporaryMessage.textContent = 'Loading...'
+    main.appendChild(temporaryMessage)
+}
+
 const fetchData = (e, url, random) => {
 
-    const main = document.querySelector('main');
-    const errorMessage = document.createElement('p');
-    errorMessage.textContent = 'Loading...'
-    main.appendChild(errorMessage)
+    addLoadingLabel()
 
     e.preventDefault();
     fetch(url)
     .then(res => res.json())
     .then(data => {
-        main.removeChild(errorMessage)
+        main.removeChild(temporaryMessage)
         if(random) {
             displayRandomData(data)
         } else {
@@ -23,7 +28,7 @@ const fetchData = (e, url, random) => {
         }
     })
     .catch(err => {
-        errorMessage.textContent = 'Server failure, try again later';
+        temporaryMessage.textContent = 'Server failure, try again later';
         console.log(err)})
 }
 
@@ -39,7 +44,6 @@ const createTags = (tags, parent) => {
 }
 const displayData = (data) => {
     const nav = document.getElementById('header');
-    const main = document.querySelector('main')
     nav.classList.add('hidden');
     for(let page in data) {
         /**
@@ -60,7 +64,6 @@ const displayData = (data) => {
          */
         const obj = data[`${page}`];
 
-        const segment = document.createElement('article');
         main.appendChild(segment);
 
         const title = document.createElement('h1');
@@ -104,10 +107,7 @@ searchBtn.addEventListener('click', (e) => fetchData(e, resultsUrl, false));
 randButton.addEventListener('click', (e) => fetchData(e, randomUrl, true));
 searchIcon.addEventListener('click', (e) => {
 
-    const main = document.querySelector('main');
-    const errorMessage = document.createElement('p');
-    errorMessage.textContent = 'Loading...'
-    main.appendChild(errorMessage)
+    addLoadingLabel()
 
     const searchString = document.getElementById('search-string').value;
     const url = 'http://api.serpstack.com/search?access_key=39bcf3350d9165e4eab1d7fd15eb7263&query=' + searchString
@@ -115,9 +115,12 @@ searchIcon.addEventListener('click', (e) => {
     fetch(url)
     .then(res => res.json())
     .then(data => {
-        main.removeChild(errorMessage);
+        main.removeChild(temporaryMessage);
         displayData(data["organic_results"])
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+        temporaryMessage.textContent = 'Server failure, try again later'
+        console.log(err)
+    })
 
 })
