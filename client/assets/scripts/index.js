@@ -27,7 +27,6 @@ const fetchData = (e, url, random) => {
         console.log(err)})
 }
 
-
 const createTags = (tags, parent) => {
     // itterate through the tags to create <li class="tag">[tagname]</li>
     for( let tag of tags) {
@@ -86,6 +85,7 @@ const displayData = (data) => {
         segment.appendChild(tags)
 
         // if coming from the search-bar, there is no obj.tags
+
         if(obj.tags) {
             createTags(obj.tags, tags)
         }
