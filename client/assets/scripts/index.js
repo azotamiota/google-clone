@@ -103,12 +103,21 @@ const displayRandomData = (data) => {
 searchBtn.addEventListener('click', (e) => fetchData(e, resultsUrl, false));
 randButton.addEventListener('click', (e) => fetchData(e, randomUrl, true));
 searchIcon.addEventListener('click', (e) => {
+
+    const main = document.querySelector('main');
+    const errorMessage = document.createElement('p');
+    errorMessage.textContent = 'Loading...'
+    main.appendChild(errorMessage)
+
     const searchString = document.getElementById('search-string').value;
     const url = 'http://api.serpstack.com/search?access_key=39bcf3350d9165e4eab1d7fd15eb7263&query=' + searchString
     
     fetch(url)
     .then(res => res.json())
-    .then(data => displayData(data["organic_results"]))
+    .then(data => {
+        main.removeChild(errorMessage);
+        displayData(data["organic_results"])
+    })
     .catch(err => console.log(err))
 
 })
