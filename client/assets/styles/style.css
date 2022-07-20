@@ -93,6 +93,7 @@ a:hover {
 
 .btn:hover {
     border-color: #bdc1c6;
+    cursor: pointer;
 }
 
 footer>* {
