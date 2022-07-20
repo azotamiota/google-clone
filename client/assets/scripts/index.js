@@ -1,7 +1,8 @@
 const searchBtn = document.getElementById('btn-search');
 const randButton = document.getElementById('btn-random');
 const searchIcon = document.getElementById('search-icon');
-const main = document.querySelector('main');
+let main = document.querySelector('main');            // Main children will be incremented by 1 by the 'article' tag after clicking searchBtn or searchIcon
+                                                    // I changed to 'let' to be able to change the value, but it's not working
 const temporaryMessage = document.createElement('p');
 const segment = document.createElement('article');
 const resultsUrl = 'http://localhost:3000/results';
@@ -13,6 +14,11 @@ const addLoadingLabel = () => {
 }
 
 const fetchData = (e, url, random) => {
+    
+    console.log('main.children.length: ', main.children.length)
+    if(main.children.length > 3) {                        // Here I want to check if there are more than 3 children element (after adding an article
+        main.removeChild(main.lastElementChild)         // there will be 4 elements) So in this case I want to remove the last child which is the article
+    }
 
     addLoadingLabel()
 
@@ -30,7 +36,9 @@ const fetchData = (e, url, random) => {
     .catch(err => {
         temporaryMessage.textContent = 'Server failure, try again later';
         console.log(err)})
-}
+
+    main = document.querySelector('main')   // Unfortunately the 'main' element's children number is incremented to 4, but the last element is still didn't
+}                                           // get removed
 
 const createTags = (tags, parent) => {
     // itterate through the tags to create <li class="tag">[tagname]</li>
@@ -43,6 +51,7 @@ const createTags = (tags, parent) => {
     }
 }
 const displayData = (data) => {
+
     const nav = document.getElementById('header');
     nav.classList.add('hidden');
     for(let page in data) {
@@ -106,6 +115,10 @@ const displayRandomData = (data) => {
 searchBtn.addEventListener('click', (e) => fetchData(e, resultsUrl, false));
 randButton.addEventListener('click', (e) => fetchData(e, randomUrl, true));
 searchIcon.addEventListener('click', (e) => {
+
+   if(main.children.length > 3) {
+        main.removeChild(main.lastElementChild)  // Same problem here, the last child element is not getting removed
+    }
 
     addLoadingLabel()
 
