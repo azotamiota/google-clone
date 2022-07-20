@@ -115,7 +115,7 @@ footer>* {
 
 .search-link {
     text-decoration: underline;
-    color: blue;
+    color: rgb(93, 93, 254);
 }
 
 @media (max-width:500px) {
