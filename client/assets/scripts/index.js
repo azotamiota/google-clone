@@ -1,14 +1,27 @@
 const searchBtn = document.getElementById('btn-search');
+const randButton = document.getElementById('btn-random');
 const resultsUrl = 'http://localhost:3000/results';
+const randomUrl = 'http://localhost:3000/results/random';
 
-const fetchData = (e) => {
+const fetchData = (e, url, random) => {
     e.preventDefault();
-    fetch(resultsUrl)
+    fetch(url)
     .then(res => res.json())
-    .then(data => displayData(data))
+    .then(data => {
+        if(random) {
+            displayRandomData(data)
+        } else {
+            displayData(data)
+        }
+    })
 }
-searchBtn.addEventListener('click', fetchData);
 
+const fetchRandomData = (e) => {
+
+}
+
+searchBtn.addEventListener('click', (e) => fetchData(e, resultsUrl, false));
+randButton.addEventListener('click', (e) => fetchData(e, randomUrl, true));
 
 const displayData = (data) => {
     const nav = document.getElementById('header');
@@ -42,4 +55,9 @@ const displayData = (data) => {
         segment.appendChild(tags);
         
     }
+}
+
+
+const displayRandomData = (data) => {
+    window.location.replace(data.url);
 }
