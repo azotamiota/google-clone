@@ -28,19 +28,6 @@ const fetchData = (e, url, random) => {
 }
 
 
-searchBtn.addEventListener('click', (e) => fetchData(e, resultsUrl, false));
-randButton.addEventListener('click', (e) => fetchData(e, randomUrl, true));
-searchIcon.addEventListener('click', (e) => {
-    const searchString = document.getElementById('search-string').value;
-    const url = 'http://api.serpstack.com/search?access_key=39bcf3350d9165e4eab1d7fd15eb7263&query=' + searchString
-    
-    fetch(url)
-    .then(res => res.json())
-    .then(data => displayData(data["organic_results"]))
-    .catch(err => console.log(err))
-
-})
-
 const createTags = (tags, parent) => {
     // itterate through the tags to create <li class="tag">[tagname]</li>
     for( let tag of tags) {
@@ -98,7 +85,7 @@ const displayData = (data) => {
         tags.setAttribute('class', 'tags')
         segment.appendChild(tags)
 
-        // if coming from the search-bar, there is no obj.tag
+        // if coming from the search-bar, there is no obj.tags
         if(obj.tags) {
             createTags(obj.tags, tags)
         }
@@ -111,3 +98,17 @@ const displayData = (data) => {
 const displayRandomData = (data) => {
     window.open(data.url, "blank") || window.location.replace(data.url);
 }
+
+
+searchBtn.addEventListener('click', (e) => fetchData(e, resultsUrl, false));
+randButton.addEventListener('click', (e) => fetchData(e, randomUrl, true));
+searchIcon.addEventListener('click', (e) => {
+    const searchString = document.getElementById('search-string').value;
+    const url = 'http://api.serpstack.com/search?access_key=39bcf3350d9165e4eab1d7fd15eb7263&query=' + searchString
+    
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displayData(data["organic_results"]))
+    .catch(err => console.log(err))
+
+})
