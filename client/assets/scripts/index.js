@@ -16,13 +16,18 @@ const fetchData = (e, url, random) => {
     })
 }
 
-const fetchRandomData = (e) => {
-
-}
 
 searchBtn.addEventListener('click', (e) => fetchData(e, resultsUrl, false));
 randButton.addEventListener('click', (e) => fetchData(e, randomUrl, true));
-
+const createTags = (tags, parent) => {
+    for( let tag of tags) {
+        const content = document.createElement('li');
+        const contentNode = document.createTextNode(tag)
+        content.setAttribute('class', 'tag')
+        content.appendChild(contentNode)
+        parent.appendChild(content);
+    }
+}
 const displayData = (data) => {
     const nav = document.getElementById('header');
     const main = document.querySelector('main')
@@ -46,13 +51,15 @@ const displayData = (data) => {
 
         const content = document.createElement('p');
         const contentNode = document.createTextNode('Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit fugiat, obcaecati cupiditate eveniet nulla neque ipsa incidunt vel laudantium rem!')
+        content.setAttribute('class', 'content')
         content.appendChild(contentNode)
         segment.appendChild(content);
 
         const tags = document.createElement('ul');
-        const tagsNode = document.createTextNode([...obj.tags])
-        tags.appendChild(tagsNode)
-        segment.appendChild(tags);
+        tags.setAttribute('class', 'tags')
+        segment.appendChild(tags)
+        createTags(obj.tags, tags)
+
         
     }
 }
