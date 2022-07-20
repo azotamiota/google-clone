@@ -109,6 +109,15 @@ footer>* {
     border-top: #bdc1c6 1px solid;
 }
 
+.hidden {
+    display: none;
+}
+
+.search-link {
+    text-decoration: underline;
+    color: blue;
+}
+
 @media (max-width:500px) {
     a {
         font-size: 8px;
