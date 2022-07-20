@@ -1,5 +1,6 @@
 const searchBtn = document.getElementById('btn-search');
 const randButton = document.getElementById('btn-random');
+const searchIcon = document.getElementById('search-icon');
 const resultsUrl = 'http://localhost:3000/results';
 const randomUrl = 'http://localhost:3000/results/random';
 
@@ -29,6 +30,17 @@ const fetchData = (e, url, random) => {
 
 searchBtn.addEventListener('click', (e) => fetchData(e, resultsUrl, false));
 randButton.addEventListener('click', (e) => fetchData(e, randomUrl, true));
+searchIcon.addEventListener('click', (e) => {
+    const searchString = document.getElementById('search-string').value;
+    const url = 'http://api.serpstack.com/search?access_key=39bcf3350d9165e4eab1d7fd15eb7263&query=' + searchString
+    
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displayData(data["organic_results"]))
+    .catch(err => console.log(err))
+
+})
+
 const createTags = (tags, parent) => {
     for( let tag of tags) {
         const content = document.createElement('li');
@@ -68,7 +80,9 @@ const displayData = (data) => {
         const tags = document.createElement('ul');
         tags.setAttribute('class', 'tags')
         segment.appendChild(tags)
-        createTags(obj.tags, tags)
+        if(obj.tags) {
+            createTags(obj.tags, tags)
+        }
 
         
     }

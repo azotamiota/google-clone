@@ -131,6 +131,10 @@ h1 {
 
 }
 
+input {
+    color:white;
+}
+
 .content {
     margin: 0;
     font-family: Arial, sans-serif;
