@@ -12,6 +12,11 @@ app.get('/results', (req, res) => {
     res.json(data)
 })
 
+app.get('/results/random', (req, res) => {
+    const randomResult = data[String(Math.ceil(Math.random() * Object.entries(data).length))]
+    res.json(randomResult)
+})
+
 app.get('/results/:id', (req, res) => {
     const id = req.params.id
     if (!data[id]) {
@@ -20,6 +25,9 @@ app.get('/results/:id', (req, res) => {
         res.status(200).json(data[id])
     }
 })
+
+
+
 
 
 module.exports = app
