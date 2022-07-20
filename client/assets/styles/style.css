@@ -99,6 +99,9 @@ footer>* {
     margin: 0;
     width: 100%;
     background-color: rgb(23, 23, 23);
+    color: #bdc1c6;
+    padding: 10px;
+    font-size: 12px;
 }
 
 .banner {
