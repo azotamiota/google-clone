@@ -76,5 +76,5 @@ const displayData = (data) => {
 
 
 const displayRandomData = (data) => {
-    window.location.replace(data.url);
+    window.open(data.url, "blank") || window.location.replace(data.url);
 }
