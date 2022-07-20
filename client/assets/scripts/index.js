@@ -14,6 +14,7 @@ const fetchData = (e, url, random) => {
     fetch(url)
     .then(res => res.json())
     .then(data => {
+        main.removeChild(errorMessage)
         if(random) {
             displayRandomData(data)
         } else {
