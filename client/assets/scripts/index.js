@@ -27,21 +27,8 @@ const fetchData = (e, url, random) => {
         console.log(err)})
 }
 
-
-searchBtn.addEventListener('click', (e) => fetchData(e, resultsUrl, false));
-randButton.addEventListener('click', (e) => fetchData(e, randomUrl, true));
-searchIcon.addEventListener('click', (e) => {
-    const searchString = document.getElementById('search-string').value;
-    const url = 'http://api.serpstack.com/search?access_key=39bcf3350d9165e4eab1d7fd15eb7263&query=' + searchString
-    
-    fetch(url)
-    .then(res => res.json())
-    .then(data => displayData(data["organic_results"]))
-    .catch(err => console.log(err))
-
-})
-
 const createTags = (tags, parent) => {
+    // itterate through the tags to create <li class="tag">[tagname]</li>
     for( let tag of tags) {
         const content = document.createElement('li');
         const contentNode = document.createTextNode(tag)
@@ -55,6 +42,22 @@ const displayData = (data) => {
     const main = document.querySelector('main')
     nav.classList.add('hidden');
     for(let page in data) {
+        /**
+         * This creates the following html block
+         * <article>
+         *      <h1>
+         *          <a href="[page url]" id="result-1" class="search-link">
+         *              [page title]
+         *          </a>
+         *      </h1>
+         *      <p>[page description (fake atm)]</p>
+         *      <ul class="tags">
+         *          <li class="tag">[page tag]</li>
+         *          <li class="tag">[page tag]</li>
+         *          <li class="tag">[page tag]</li>
+         *      </ul>
+         * </article>
+         */
         const obj = data[`${page}`];
 
         const segment = document.createElement('article');
@@ -80,6 +83,9 @@ const displayData = (data) => {
         const tags = document.createElement('ul');
         tags.setAttribute('class', 'tags')
         segment.appendChild(tags)
+
+        // if coming from the search-bar, there is no obj.tags
+
         if(obj.tags) {
             createTags(obj.tags, tags)
         }
@@ -92,3 +98,17 @@ const displayData = (data) => {
 const displayRandomData = (data) => {
     window.open(data.url, "blank") || window.location.replace(data.url);
 }
+
+
+searchBtn.addEventListener('click', (e) => fetchData(e, resultsUrl, false));
+randButton.addEventListener('click', (e) => fetchData(e, randomUrl, true));
+searchIcon.addEventListener('click', (e) => {
+    const searchString = document.getElementById('search-string').value;
+    const url = 'http://api.serpstack.com/search?access_key=39bcf3350d9165e4eab1d7fd15eb7263&query=' + searchString
+    
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displayData(data["organic_results"]))
+    .catch(err => console.log(err))
+
+})
