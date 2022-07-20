@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/styles/style.css">
     <script src="./assets/scripts/index.js"></script>
     <title>Document</title>
@@ -11,23 +14,41 @@
 <body>
     <header class="header">
         <nav>
-            <div class="links-left">
-                <a href="../README.md" class="about">About</a>
-                <a href="../README.md" class="store">About</a>
-            </div>
-            <div class="links-right">
-                <a href="">Gmail</a>
-                <a href="">Images</a>
-                <a href="">Hamburger</a>
-                <a href="">Avatar</a>
-            </div>
+            <ul class="links links-left">
+                <li><a href="../README.md" class="about">About</a></li>
+                <li><a href="../README.md" class="store">About</a></li>
+            </ul>
+            <ul class="links links-right">
+                <li><a href="" class="right">Gmail</a></li>
+                <li><a href="" class="right">Images</a></li>
+                <li><a href="" class="right">Hamburger</a></li>
+                <li><a href="" class="right">Avatar</a></li>
+            </ul>
         </nav>
     </header>
     <main class="main">
-        <h1>Goggles</h1>
+        <h1><img src="https://www.google.co.uk/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png" alt="google logo"></h1>
         <div class="search-bar"><img><img></div>
-        <button class="btn" id="btn-search">Goggles Search</button>
-        <button class="btn" id="btn-random">I'm feeling lucky</button>
+        <div class="buttons">
+            <button class="btn" id="btn-search">Google Search</button>
+        <button class="btn" id="btn-random">I'm Feeling lucky</button>
+        </div>
     </main>
+    <footer>
+        <p class="country">United Kingdom</p>
+        <div class="banner carbon-neutral">Carbon neutral since 2007</div>
+        <nav>
+            <ul class="links">
+                <li><a href="">Advertising</a></li>
+                <li><a href="">Business</a></li>
+                <li><a href="">How Search works</a></li>
+            </ul>
+            <ul>
+                <li><a href="">Privacy</a></li>
+                <li><a href="">Terms</a></li>
+                <li><a href="">Settings</a></li>
+            </ul>
+        </nav>
+    </footer>
 </body>
 </html>
