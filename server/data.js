@@ -9,4 +9,4 @@ const results = {"result-1": {"title": "YouTube", url: "https://www.youtube.com"
 "result-9": {"title": "Love Volunteers", url: "https://www.lovevolunteers.org/", tags: ["volunteer", "global", "empathy"]},
 "result-10": {"title": "Delish", url: "https://www.delish.com/", tags: ["cooking", "recipe", "food"]}}
 
-module.exports = data
+module.exports = results
