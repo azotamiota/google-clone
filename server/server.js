@@ -1,8 +1,10 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 const data = require('./data')
 
 app.use(express.json())
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('<h1 style="text-align : center; padding: 1em">Welcome to the Google clone created by Aggie & Norbert</h1>')
