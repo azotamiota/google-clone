@@ -27,7 +27,4 @@ app.get('/results/:id', (req, res) => {
 })
 
 
-
-
-
 module.exports = app

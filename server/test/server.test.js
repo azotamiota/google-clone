@@ -20,4 +20,10 @@ describe("API test", () => {
             .expect(200, done)
     })
 
+    it('2. Retrieve all results at "/results"', async () => {
+        const allResults = await supertest(api).get('/results')
+        console.log('allresults: ', allResults.body)
+        expect(allResults.body['4']['title']).toEqual('Kiwi')
+    })
+
 })
