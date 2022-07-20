@@ -4,6 +4,12 @@ const resultsUrl = 'http://localhost:3000/results';
 const randomUrl = 'http://localhost:3000/results/random';
 
 const fetchData = (e, url, random) => {
+
+    const main = document.querySelector('main');
+    const errorMessage = document.createElement('p');
+    errorMessage.textContent = 'Loading...'
+    main.appendChild(errorMessage)
+
     e.preventDefault();
     fetch(url)
     .then(res => res.json())
@@ -14,6 +20,9 @@ const fetchData = (e, url, random) => {
             displayData(data)
         }
     })
+    .catch(err => {
+        errorMessage.textContent = 'Server failure, try again later';
+        console.log(err)})
 }
 
 const fetchRandomData = (e) => {
