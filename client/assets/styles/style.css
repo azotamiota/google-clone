@@ -114,10 +114,42 @@ footer>* {
     display: none;
 }
 
-.search-link {
-    text-decoration: underline;
-    color: rgb(93, 93, 254);
+h1 {
+    margin: 0;
 }
+
+.search-link {
+    color: #8ab4f8;
+    font-size: 20px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.search-link:hover, .tag:hover {
+    text-decoration: underline;
+
+}
+
+.content {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #bdc1c6;
+
+}
+
+.tags {
+    padding: 0;
+    color: #8ab4f8;
+    font-size: 14px;
+}
+
+.tag {
+    padding-right: 10px;
+    display: inline-block; /* otherwise was capitalising only the first tag */
+    text-transform: capitalize;
+}
+
 
 @media (max-width:500px) {
     a {
